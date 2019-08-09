@@ -1,331 +1,80 @@
 ```
-$ bazel build :app_prod
-2019/08/09 17:43:25 Using unreleased version at commit c082f02ba2d07a97363596ed087c83e29a4582ed
-INFO: Analyzed target //:app_prod (3 packages loaded, 347 targets configured).
-INFO: Found 1 target...
-ERROR: /Users/jingwen/code/android-databinding/BasicSample/BUILD.bazel:4:1: Linking static android resource library for //:lib_prod_base failed (Exit 1) ResourceProcessorBusyBox failed: error executing command bazel-out/host/bin/external/bazel_tools/src/tools/android/java/com/google/devtools/build/android/ResourceProcessorBusyBox --tool LINK_STATIC_LIBRARY -- --aapt2 ... (remaining 17 argument(s) skipped)
+$ gbazel build :app_prod
+Starting local Bazel server and connecting to it...
+INFO: SHA256 (https://github.com/cgruber/rules_kotlin/archive/ecc895796f503f43a2f2fb2a120ee54fa597cd34.tar.gz) = 97b5aa8f112de30120e0370370233308dfe211613806ce44d128ef054853216a
+DEBUG: Rule 'io_bazel_rules_kotlin' indicated that a canonical reproducible form can be obtained by modifying arguments sha256 = "97b5aa8f112de30120e0370370233308dfe211613806ce44d128ef054853216a"
+DEBUG: Call stack for the definition of repository 'io_bazel_rules_kotlin' which is a http_archive (rule definition at /private/var/tmp/_bazel_jingwen/22be5a319b43ffe7bbcc1d52b3964b01/external/bazel_tools/tools/build_defs/repo/http.bzl:292:16):
+ - /Users/jingwen/code/android-databinding/BasicSample/WORKSPACE:57:1
+Internal error thrown during build. Printing stack trace: java.lang.RuntimeException: Unrecoverable error while evaluating node '//:lib_prod_base BuildConfigurationValue.Key[8fe199b1d7e040eb0f4fce7a691a28cb] false' (requested by nodes '//:lib_prod BuildConfigurationValue.Key[8fe199b1d7e040eb0f4fce7a691a28cb] false', '//:lib_prod_kt BuildConfigurationValue.Key[8fe199b1d7e040eb0f4fce7a691a28cb] false')
+	at com.google.devtools.build.skyframe.AbstractParallelEvaluator$Evaluate.run(AbstractParallelEvaluator.java:528)
+	at com.google.devtools.build.lib.concurrent.AbstractQueueVisitor$WrappedRunnable.run(AbstractQueueVisitor.java:399)
+	at java.base/java.util.concurrent.ForkJoinTask$AdaptedRunnableAction.exec(Unknown Source)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(Unknown Source)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(Unknown Source)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(Unknown Source)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(Unknown Source)
+Caused by: java.lang.NullPointerException
+	at com.google.devtools.build.lib.rules.java.JavaCompilationHelper.usesAnnotationProcessing(JavaCompilationHelper.java:434)
+	at com.google.devtools.build.lib.rules.android.AndroidCommon.initJava(AndroidCommon.java:613)
+	at com.google.devtools.build.lib.rules.android.AndroidCommon.init(AndroidCommon.java:547)
+	at com.google.devtools.build.lib.rules.android.AndroidLibrary.create(AndroidLibrary.java:201)
+	at com.google.devtools.build.lib.rules.android.AndroidLibrary.create(AndroidLibrary.java:43)
+	at com.google.devtools.build.lib.analysis.ConfiguredTargetFactory.createRule(ConfiguredTargetFactory.java:331)
+	at com.google.devtools.build.lib.analysis.ConfiguredTargetFactory.createConfiguredTarget(ConfiguredTargetFactory.java:182)
+	at com.google.devtools.build.lib.skyframe.SkyframeBuildView.createConfiguredTarget(SkyframeBuildView.java:767)
+	at com.google.devtools.build.lib.skyframe.ConfiguredTargetFunction.createConfiguredTarget(ConfiguredTargetFunction.java:891)
+	at com.google.devtools.build.lib.skyframe.ConfiguredTargetFunction.compute(ConfiguredTargetFunction.java:351)
+	at com.google.devtools.build.skyframe.AbstractParallelEvaluator$Evaluate.run(AbstractParallelEvaluator.java:451)
+	... 7 more
 
-Use --sandbox_debug to see verbose messages from the sandbox
-Aug 09, 2019 5:43:35 PM com.google.devtools.build.android.AndroidManifest parseFrom
-WARNING:
-CONFIGURATION: bazel-out/android-armeabi-v7a-fastbuild/bin/lib_prod_base_processed_manifest/AndroidManifest.xml has no minSdkVersion. Using 1.
-Aug 09, 2019 5:43:37 PM com.google.devtools.build.android.ValidateAndLinkResourcesAction main
-SEVERE: Error while validating and linking resources
-java.lang.RuntimeException: Error during Statically linking com.google.devtools.build.android.aapt2.CompiledResources@4802796d:
-Command: bazel-out/host/bin/external/androidsdk/aapt2_binary\
-	link\
-	--static-lib\
-	--manifest\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/manifest-aapt-dummy/AndroidManifest.xml\
-	--no-static-lib-packages\
-	--no-version-vectors\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_appcompat_appcompat_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_interpolator_interpolator_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_fragment_fragment_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_lifecycle_lifecycle_viewmodel_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_localbroadcastmanager_localbroadcastmanager_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_legacy_legacy_support_core_utils_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_core_core_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_versionedparcelable_versionedparcelable_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_lifecycle_lifecycle_runtime_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_lifecycle_lifecycle_livedata_core_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_arch_core_core_runtime_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_print_print_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_lifecycle_lifecycle_livedata_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_documentfile_documentfile_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_loader_loader_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_slidingpanelayout_slidingpanelayout_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_customview_customview_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_cursoradapter_cursoradapter_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_coordinatorlayout_coordinatorlayout_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_viewpager_viewpager_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_asynclayoutinflater_asynclayoutinflater_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_legacy_legacy_support_core_ui_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_swiperefreshlayout_swiperefreshlayout_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_drawerlayout_drawerlayout_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_vectordrawable_vectordrawable_animated_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_vectordrawable_vectordrawable_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_constraintlayout_constraintlayout_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_lifecycle_lifecycle_extensions_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_lifecycle_lifecycle_service_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_lifecycle_lifecycle_process_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_databinding_databinding_runtime_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_databinding_databinding_adapters_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/lib_prod_base_symbols/symbols.zip\
-	-I\
-	external/androidsdk/platforms/android-28/android.jar\
-	--auto-add-overlay\
-	-o\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/lib.apk\
-	--java\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/java\
-	--output-text-symbols\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/R.txt
-Output:
-app/src/main/res/layout/observable_field_profile.xml:68: error: '@{user.likes < 4 ? R.drawable.ic_person_black_96dp : R.drawable.ic_whatshot_black_96dp }' is incompatible with attribute srcCompat (attr) reference [weak].
-app/src/main/res/layout/observable_field_profile.xml:68: error: '@{user.likes > 9 ? @color/star : @android:color/black}' is incompatible with attribute tint (attr) color.
-app/src/main/res/layout/observable_field_profile.xml:155: error: attribute progressScaled (aka com.example.android.databinding.basicsample:progressScaled) not found.
-app/src/main/res/layout/observable_field_profile.xml:155: error: '@{100}' is incompatible with attribute max (attr) integer.
-app/src/main/res/layout/observable_field_profile.xml:155: error: '@{ConverterUtil.isZero(user.likes)}' is incompatible with attribute visibility (attr) enum [gone=2, invisible=1, visible=0].
-app/src/main/res/layout/viewmodel_profile.xml:65: error: attribute popularityIcon (aka com.example.android.databinding.basicsample:popularityIcon) not found.
-app/src/main/res/layout/viewmodel_profile.xml:147: error: attribute hideIfZero (aka com.example.android.databinding.basicsample:hideIfZero) not found.
-app/src/main/res/layout/viewmodel_profile.xml:147: error: attribute progressScaled (aka com.example.android.databinding.basicsample:progressScaled) not found.
-app/src/main/res/layout/viewmodel_profile.xml:147: error: attribute progressTint (aka com.example.android.databinding.basicsample:progressTint) not found.
-app/src/main/res/layout/viewmodel_profile.xml:147: error: '@{100}' is incompatible with attribute max (attr) integer.
-error: failed linking file resources.
-
-	at com.google.devtools.build.android.AaptCommandBuilder.execute(AaptCommandBuilder.java:318)
-	at com.google.devtools.build.android.aapt2.ResourceLinker.linkStatically(ResourceLinker.java:273)
-	at com.google.devtools.build.android.ValidateAndLinkResourcesAction.main(ValidateAndLinkResourcesAction.java:195)
-	at com.google.devtools.build.android.ResourceProcessorBusyBox$Tool$12.call(ResourceProcessorBusyBox.java:132)
-	at com.google.devtools.build.android.ResourceProcessorBusyBox.processRequest(ResourceProcessorBusyBox.java:237)
-	at com.google.devtools.build.android.ResourceProcessorBusyBox.main(ResourceProcessorBusyBox.java:198)
-
-Aug 09, 2019 5:43:37 PM com.google.devtools.build.android.ResourceProcessorBusyBox processRequest
-SEVERE: Error during processing
-java.lang.RuntimeException: Error during Statically linking com.google.devtools.build.android.aapt2.CompiledResources@4802796d:
-Command: bazel-out/host/bin/external/androidsdk/aapt2_binary\
-	link\
-	--static-lib\
-	--manifest\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/manifest-aapt-dummy/AndroidManifest.xml\
-	--no-static-lib-packages\
-	--no-version-vectors\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_appcompat_appcompat_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_interpolator_interpolator_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_fragment_fragment_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_lifecycle_lifecycle_viewmodel_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_localbroadcastmanager_localbroadcastmanager_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_legacy_legacy_support_core_utils_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_core_core_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_versionedparcelable_versionedparcelable_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_lifecycle_lifecycle_runtime_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_lifecycle_lifecycle_livedata_core_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_arch_core_core_runtime_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_print_print_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_lifecycle_lifecycle_livedata_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_documentfile_documentfile_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_loader_loader_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_slidingpanelayout_slidingpanelayout_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_customview_customview_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_cursoradapter_cursoradapter_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_coordinatorlayout_coordinatorlayout_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_viewpager_viewpager_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_asynclayoutinflater_asynclayoutinflater_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_legacy_legacy_support_core_ui_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_swiperefreshlayout_swiperefreshlayout_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_drawerlayout_drawerlayout_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_vectordrawable_vectordrawable_animated_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_vectordrawable_vectordrawable_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_constraintlayout_constraintlayout_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_lifecycle_lifecycle_extensions_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_lifecycle_lifecycle_service_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_lifecycle_lifecycle_process_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_databinding_databinding_runtime_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_databinding_databinding_adapters_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/lib_prod_base_symbols/symbols.zip\
-	-I\
-	external/androidsdk/platforms/android-28/android.jar\
-	--auto-add-overlay\
-	-o\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/lib.apk\
-	--java\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/java\
-	--output-text-symbols\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/R.txt
-Output:
-app/src/main/res/layout/observable_field_profile.xml:68: error: '@{user.likes < 4 ? R.drawable.ic_person_black_96dp : R.drawable.ic_whatshot_black_96dp }' is incompatible with attribute srcCompat (attr) reference [weak].
-app/src/main/res/layout/observable_field_profile.xml:68: error: '@{user.likes > 9 ? @color/star : @android:color/black}' is incompatible with attribute tint (attr) color.
-app/src/main/res/layout/observable_field_profile.xml:155: error: attribute progressScaled (aka com.example.android.databinding.basicsample:progressScaled) not found.
-app/src/main/res/layout/observable_field_profile.xml:155: error: '@{100}' is incompatible with attribute max (attr) integer.
-app/src/main/res/layout/observable_field_profile.xml:155: error: '@{ConverterUtil.isZero(user.likes)}' is incompatible with attribute visibility (attr) enum [gone=2, invisible=1, visible=0].
-app/src/main/res/layout/viewmodel_profile.xml:65: error: attribute popularityIcon (aka com.example.android.databinding.basicsample:popularityIcon) not found.
-app/src/main/res/layout/viewmodel_profile.xml:147: error: attribute hideIfZero (aka com.example.android.databinding.basicsample:hideIfZero) not found.
-app/src/main/res/layout/viewmodel_profile.xml:147: error: attribute progressScaled (aka com.example.android.databinding.basicsample:progressScaled) not found.
-app/src/main/res/layout/viewmodel_profile.xml:147: error: attribute progressTint (aka com.example.android.databinding.basicsample:progressTint) not found.
-app/src/main/res/layout/viewmodel_profile.xml:147: error: '@{100}' is incompatible with attribute max (attr) integer.
-error: failed linking file resources.
-
-	at com.google.devtools.build.android.AaptCommandBuilder.execute(AaptCommandBuilder.java:318)
-	at com.google.devtools.build.android.aapt2.ResourceLinker.linkStatically(ResourceLinker.java:273)
-	at com.google.devtools.build.android.ValidateAndLinkResourcesAction.main(ValidateAndLinkResourcesAction.java:195)
-	at com.google.devtools.build.android.ResourceProcessorBusyBox$Tool$12.call(ResourceProcessorBusyBox.java:132)
-	at com.google.devtools.build.android.ResourceProcessorBusyBox.processRequest(ResourceProcessorBusyBox.java:237)
-	at com.google.devtools.build.android.ResourceProcessorBusyBox.main(ResourceProcessorBusyBox.java:198)
-
-Exception in thread "main" java.lang.RuntimeException: Error during Statically linking com.google.devtools.build.android.aapt2.CompiledResources@4802796d:
-Command: bazel-out/host/bin/external/androidsdk/aapt2_binary\
-	link\
-	--static-lib\
-	--manifest\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/manifest-aapt-dummy/AndroidManifest.xml\
-	--no-static-lib-packages\
-	--no-version-vectors\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_appcompat_appcompat_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_interpolator_interpolator_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_fragment_fragment_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_lifecycle_lifecycle_viewmodel_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_localbroadcastmanager_localbroadcastmanager_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_legacy_legacy_support_core_utils_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_core_core_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_versionedparcelable_versionedparcelable_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_lifecycle_lifecycle_runtime_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_lifecycle_lifecycle_livedata_core_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_arch_core_core_runtime_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_print_print_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_lifecycle_lifecycle_livedata_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_documentfile_documentfile_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_loader_loader_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_slidingpanelayout_slidingpanelayout_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_customview_customview_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_cursoradapter_cursoradapter_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_coordinatorlayout_coordinatorlayout_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_viewpager_viewpager_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_asynclayoutinflater_asynclayoutinflater_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_legacy_legacy_support_core_ui_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_swiperefreshlayout_swiperefreshlayout_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_drawerlayout_drawerlayout_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_vectordrawable_vectordrawable_animated_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_vectordrawable_vectordrawable_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_constraintlayout_constraintlayout_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_lifecycle_lifecycle_extensions_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_lifecycle_lifecycle_service_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_lifecycle_lifecycle_process_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_databinding_databinding_runtime_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/external/maven/androidx_databinding_databinding_adapters_symbols/symbols.zip\
-	-R\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/filtered/bazel-out/android-armeabi-v7a-fastbuild/bin/lib_prod_base_symbols/symbols.zip\
-	-I\
-	external/androidsdk/platforms/android-28/android.jar\
-	--auto-add-overlay\
-	-o\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/lib.apk\
-	--java\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/java\
-	--output-text-symbols\
-	/var/folders/6s/dh8ytxkd39l2k3jmpqgxzjvr00ch_3/T/android_resources_tmp5532907378362982445/R.txt
-Output:
-app/src/main/res/layout/observable_field_profile.xml:68: error: '@{user.likes < 4 ? R.drawable.ic_person_black_96dp : R.drawable.ic_whatshot_black_96dp }' is incompatible with attribute srcCompat (attr) reference [weak].
-app/src/main/res/layout/observable_field_profile.xml:68: error: '@{user.likes > 9 ? @color/star : @android:color/black}' is incompatible with attribute tint (attr) color.
-app/src/main/res/layout/observable_field_profile.xml:155: error: attribute progressScaled (aka com.example.android.databinding.basicsample:progressScaled) not found.
-app/src/main/res/layout/observable_field_profile.xml:155: error: '@{100}' is incompatible with attribute max (attr) integer.
-app/src/main/res/layout/observable_field_profile.xml:155: error: '@{ConverterUtil.isZero(user.likes)}' is incompatible with attribute visibility (attr) enum [gone=2, invisible=1, visible=0].
-app/src/main/res/layout/viewmodel_profile.xml:65: error: attribute popularityIcon (aka com.example.android.databinding.basicsample:popularityIcon) not found.
-app/src/main/res/layout/viewmodel_profile.xml:147: error: attribute hideIfZero (aka com.example.android.databinding.basicsample:hideIfZero) not found.
-app/src/main/res/layout/viewmodel_profile.xml:147: error: attribute progressScaled (aka com.example.android.databinding.basicsample:progressScaled) not found.
-app/src/main/res/layout/viewmodel_profile.xml:147: error: attribute progressTint (aka com.example.android.databinding.basicsample:progressTint) not found.
-app/src/main/res/layout/viewmodel_profile.xml:147: error: '@{100}' is incompatible with attribute max (attr) integer.
-error: failed linking file resources.
-
-	at com.google.devtools.build.android.AaptCommandBuilder.execute(AaptCommandBuilder.java:318)
-	at com.google.devtools.build.android.aapt2.ResourceLinker.linkStatically(ResourceLinker.java:273)
-	at com.google.devtools.build.android.ValidateAndLinkResourcesAction.main(ValidateAndLinkResourcesAction.java:195)
-	at com.google.devtools.build.android.ResourceProcessorBusyBox$Tool$12.call(ResourceProcessorBusyBox.java:132)
-	at com.google.devtools.build.android.ResourceProcessorBusyBox.processRequest(ResourceProcessorBusyBox.java:237)
-	at com.google.devtools.build.android.ResourceProcessorBusyBox.main(ResourceProcessorBusyBox.java:198)
-Target //:app_prod failed to build
-Use --verbose_failures to see the command lines of failed build steps.
-INFO: Elapsed time: 11.870s, Critical Path: 3.00s
-INFO: 25 processes: 25 darwin-sandbox.
-FAILED: Build did NOT complete successfully
+INFO: Elapsed time: 23.180s
+INFO: 0 processes.
+FAILED: Build did NOT complete successfully (104 packages loaded, 1383 targets configured)
+Internal error thrown during build. Printing stack trace: java.lang.RuntimeException: Unrecoverable error while evaluating node '//:lib_prod_base BuildConfigurationValue.Key[8fe199b1d7e040eb0f4fce7a691a28cb] false' (requested by nodes '//:lib_prod BuildConfigurationValue.Key[8fe199b1d7e040eb0f4fce7a691a28cb] false', '//:lib_prod_kt BuildConfigurationValue.Key[8fe199b1d7e040eb0f4fce7a691a28cb] false')
+	at com.google.devtools.build.skyframe.AbstractParallelEvaluator$Evaluate.run(AbstractParallelEvaluator.java:528)
+	at com.google.devtools.build.lib.concurrent.AbstractQueueVisitor$WrappedRunnable.run(AbstractQueueVisitor.java:399)
+	at java.base/java.util.concurrent.ForkJoinTask$AdaptedRunnableAction.exec(Unknown Source)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(Unknown Source)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(Unknown Source)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(Unknown Source)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(Unknown Source)
+Caused by: java.lang.NullPointerException
+	at com.google.devtools.build.lib.rules.java.JavaCompilationHelper.usesAnnotationProcessing(JavaCompilationHelper.java:434)
+	at com.google.devtools.build.lib.rules.android.AndroidCommon.initJava(AndroidCommon.java:613)
+	at com.google.devtools.build.lib.rules.android.AndroidCommon.init(AndroidCommon.java:547)
+	at com.google.devtools.build.lib.rules.android.AndroidLibrary.create(AndroidLibrary.java:201)
+	at com.google.devtools.build.lib.rules.android.AndroidLibrary.create(AndroidLibrary.java:43)
+	at com.google.devtools.build.lib.analysis.ConfiguredTargetFactory.createRule(ConfiguredTargetFactory.java:331)
+	at com.google.devtools.build.lib.analysis.ConfiguredTargetFactory.createConfiguredTarget(ConfiguredTargetFactory.java:182)
+	at com.google.devtools.build.lib.skyframe.SkyframeBuildView.createConfiguredTarget(SkyframeBuildView.java:767)
+	at com.google.devtools.build.lib.skyframe.ConfiguredTargetFunction.createConfiguredTarget(ConfiguredTargetFunction.java:891)
+	at com.google.devtools.build.lib.skyframe.ConfiguredTargetFunction.compute(ConfiguredTargetFunction.java:351)
+	at com.google.devtools.build.skyframe.AbstractParallelEvaluator$Evaluate.run(AbstractParallelEvaluator.java:451)
+	... 7 more
+java.lang.RuntimeException: Unrecoverable error while evaluating node '//:lib_prod_base BuildConfigurationValue.Key[8fe199b1d7e040eb0f4fce7a691a28cb] false' (requested by nodes '//:lib_prod BuildConfigurationValue.Key[8fe199b1d7e040eb0f4fce7a691a28cb] false', '//:lib_prod_kt BuildConfigurationValue.Key[8fe199b1d7e040eb0f4fce7a691a28cb] false')
+	at com.google.devtools.build.skyframe.AbstractParallelEvaluator$Evaluate.run(AbstractParallelEvaluator.java:528)
+	at com.google.devtools.build.lib.concurrent.AbstractQueueVisitor$WrappedRunnable.run(AbstractQueueVisitor.java:399)
+	at java.base/java.util.concurrent.ForkJoinTask$AdaptedRunnableAction.exec(Unknown Source)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(Unknown Source)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(Unknown Source)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(Unknown Source)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(Unknown Source)
+Caused by: java.lang.NullPointerException
+	at com.google.devtools.build.lib.rules.java.JavaCompilationHelper.usesAnnotationProcessing(JavaCompilationHelper.java:434)
+	at com.google.devtools.build.lib.rules.android.AndroidCommon.initJava(AndroidCommon.java:613)
+	at com.google.devtools.build.lib.rules.android.AndroidCommon.init(AndroidCommon.java:547)
+	at com.google.devtools.build.lib.rules.android.AndroidLibrary.create(AndroidLibrary.java:201)
+	at com.google.devtools.build.lib.rules.android.AndroidLibrary.create(AndroidLibrary.java:43)
+	at com.google.devtools.build.lib.analysis.ConfiguredTargetFactory.createRule(ConfiguredTargetFactory.java:331)
+	at com.google.devtools.build.lib.analysis.ConfiguredTargetFactory.createConfiguredTarget(ConfiguredTargetFactory.java:182)
+	at com.google.devtools.build.lib.skyframe.SkyframeBuildView.createConfiguredTarget(SkyframeBuildView.java:767)
+	at com.google.devtools.build.lib.skyframe.ConfiguredTargetFunction.createConfiguredTarget(ConfiguredTargetFunction.java:891)
+	at com.google.devtools.build.lib.skyframe.ConfiguredTargetFunction.compute(ConfiguredTargetFunction.java:351)
+	at com.google.devtools.build.skyframe.AbstractParallelEvaluator$Evaluate.run(AbstractParallelEvaluator.java:451)
+FAILED: Build did NOT complete successfully (104 packages loaded, 1383 targets configured)
 ```
 
 
