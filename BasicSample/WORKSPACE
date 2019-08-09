@@ -1,0 +1,4 @@
+local_repository(
+    name = "rules_experimental_android",
+    path = "/Users/jingwen/code/rules_experimental_android",
+)
